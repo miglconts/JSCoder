@@ -24,6 +24,7 @@ do{
     console.log("hey");
 }while(condition)
  */
+
 let moneda = "arg";
 
 switch(moneda){

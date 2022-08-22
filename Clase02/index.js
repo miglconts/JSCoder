@@ -91,7 +91,7 @@ let pais = "Estados Unidos" */
             
             default:
                 break */
-let nombre = prompt("Ingresa tu nombre")
+/* let nombre = prompt("Ingresa tu nombre")
 let edad = prompt("Ingresa tu edad")
 let pais = prompt("Ingresa tu pais")
 
@@ -118,4 +118,24 @@ switch (pais.toLocaleLowerCase()) {
 
     default:
         break;
+} */
+
+let x = 20
+
+switch(x){
+    case 10:
+    case 20:
+    case 30:
+        console.log('x es multiplo de  10');
+        break;
+    case 3:
+    case 6:
+    case 9:
+        console.log('x es multiplo 3');
+        break;
+    
+    default:
+        console.log('x no es ni 10 ni 3');
+        break;
+
 }

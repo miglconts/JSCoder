@@ -33,7 +33,7 @@ alert(salida) */
 let primerNumeroParse = parseInt(prompt('ingresa un numero'))
 let segundoNumeroParse = parseInt(prompt('ingresa otro numero'))
 let sumaParse = primerNumeroParse + segundoNumeroParse;
-alert(sumaParse)
+alert(sumaParse) 
 
 
 
