@@ -2,7 +2,7 @@
 
 // TODO Recopilar Datos de ingresos
 
-let ingreso = parseInt(prompt("Ingresos netos mensuales en MNX"));
+//let ingreso = parseInt(prompt("Ingresos netos mensuales en MNX"));
 
 let tope0 = 25000;
 let tope1 = 50000;
@@ -13,7 +13,7 @@ let tope3 = 208333;
 function limite(ingreso, tope0, tope1, tope2, tope3) {
   switch (true) {
     case ingreso <= tope0:
-      alert(
+      console.log(
         `Con un ingreso de ${ingreso} MNX el ISR es de ${
           ingreso * 0.01
         } MNX, el saldo libre de impuestos es de ${
@@ -22,7 +22,7 @@ function limite(ingreso, tope0, tope1, tope2, tope3) {
       );
       break;
     case ingreso <= tope1:
-      alert(
+      console.log(
         `Con un ingreso de ${ingreso} MNX el ISR es de ${
           ingreso * 0.011
         } MNX, el saldo libre de impuestos es de ${
@@ -31,7 +31,7 @@ function limite(ingreso, tope0, tope1, tope2, tope3) {
       );
       break;
     case ingreso <= tope2:
-      alert(
+      console.log(
         `Con un ingreso de ${ingreso} MNX el ISR es de ${
           ingreso * 0.015
         } MNX, el saldo libre de impuestos es de ${
@@ -40,7 +40,7 @@ function limite(ingreso, tope0, tope1, tope2, tope3) {
       );
       break;
     case ingreso <= tope3:
-      alert(
+      console.log(
         `Con un ingreso de ${ingreso} MNX el ISR es de ${
           ingreso * 0.02
         } MNX, el saldo libre de impuestos es de ${
@@ -50,11 +50,41 @@ function limite(ingreso, tope0, tope1, tope2, tope3) {
       break;
 
     default:
-      alert(
+      console.log(
         "Ingresa una cantidad menor a 208,333 MNX, de lo contrario tu régimen es incorrecto o ingresaste un carácter que no es un número "
       );
       break;
   }
 }
 
-limite(ingreso, tope0, tope1, tope2, tope3);
+//limite(ingreso, tope0, tope1, tope2, tope3);
+
+
+//! Arrays
+//Desafio arrays
+class User {
+  constructor(user) {
+    this.name = user.name;
+    this.lastName = user.lastName;
+    this.age = user.age;
+    this.income = user.income;
+  }
+}
+
+let users = [
+  new User({ name: "Miguel", lastName: "Contreras", age: 28, income: 20000 }),
+  new User({ name: "Karla", lastName: "Mateos", age: 27, income: 26000 }),
+  new User({ name: "Ricardo", lastName: "Villaseñor", age: 35, income: 11200 }),
+  new User({ name: "Ivette", lastName: "Cruz", age: 35, income: 30000 }),
+  new User({ name: "Miriam", lastName: "Gonzalez", age: 39, income: 46000 }),
+  new User({ name: "María", lastName: "Juan", age: 59, income: 55000 }),
+];
+
+// Ordenar de mayor a menor ungreso
+let topIncome = users.sort((a, b) => b.income - a.income);
+console.log(topIncome[0]);
+
+//Calcular los impuestos
+let userTaxes = users.forEach((user) => {
+  limite(user.income, tope0, tope1, tope2, tope3);
+});
