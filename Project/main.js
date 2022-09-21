@@ -57,32 +57,81 @@ class User {
 }
 
 let users = [
-  new User({ name: "Miguel", lastName: "Contreras", age: 28, income: 20000 }),
-  new User({ name: "Karla", lastName: "Mateos", age: 27, income: 26000 }),
-  new User({ name: "Ricardo", lastName: "Villaseñor", age: 35, income: 11200 }),
-  new User({ name: "Ivette", lastName: "Cruz", age: 35, income: 30000 }),
-  new User({ name: "Miriam", lastName: "Gonzalez", age: 39, income: 46000 }),
-  new User({ name: "María", lastName: "Juan", age: 59, income: 55000 }),
+  new User({
+    name: "Miguel Angel",
+    lastName: "Contreras Cruz",
+    income: 20000,
+  }),
+  new User({
+    name: "Karla",
+    lastName: "Mateos Flores",
+    income: 26000,
+  }),
+  new User({
+    name: "Ricardo",
+    lastName: "Villaseñor Sanchez",
+    income: 11200,
+  }),
+  new User({
+    name: "Ivette",
+    lastName: "Cruz Contreras",
+    income: 30000,
+  }),
+  new User({
+    name: "Miriam",
+    lastName: "Gonzalez Contreras",
+    income: 46000,
+  }),
+  new User({
+    name: "María Juana",
+    lastName: "Cruz Juan",
+    income: 55000,
+  }),
 ];
+//!Form
+const myForm = document.forms["myForm"];
+myForm.onsubmit = function (e) {
+  e.preventDefault();
+  let nme = document.getElementById("nme").value;
+  let lsNme = document.getElementById("lastName").value;
+  let incm = document.getElementById("income").value;
+  users.push(
+    new User({
+      name: nme,
+      lastName: lsNme,
+      income: incm,
+    })
+  );
 
-// Ordenar de mayor a menor ungreso
-let topIncome = users.sort((a, b) => b.income - a.income);
-console.log(topIncome[0]);
+  // Ordenar de mayor a menor ungreso
+  let topIncome = users.sort((a, b) => b.income - a.income);
 
-//Calcular los impuestos
-let userTaxes = users.forEach((user) => {
-  limite(user.income, tope0, tope1, tope2, tope3);
-});
+  //Calcular los impuestos
+  let userTaxes = users.forEach((user) => {
+    limite(user.income, tope0, tope1, tope2, tope3);
+  });
 
-let userList = document.getElementById("userList");
-userList.append();
+  let userList = document.getElementById("userList");
 
-for (const usuario of topIncome) {
-  let userDiv = document.createElement("div");
-  userDiv.innerHTML = `
+  for (const usuario of topIncome) {
+    let userDiv = document.createElement("div");
+    userDiv.className = "user";
+    userDiv.innerHTML = `
   <H2> ${usuario.name} ${usuario.lastName} </H2>
-  <h3> ${usuario.age} años  con un ingreso de  $${usuario.income}.00 MXN </h3>
+  <h3> Con un ingreso de  $${usuario.income}.00 MXN </h3>
   <p> ${limite(usuario.income, tope0, tope1, tope2, tope3)} </p>
   `;
-  userList.append(userDiv);
-}
+    userList.append(userDiv);
+  }
+  //Botones
+  const btn = document.getElementById("resetButton");
+  const persons = document.querySelectorAll(".user");
+  console.log(persons);
+
+  btn.addEventListener("click", () => {
+    console.log("hey");
+    persons.forEach((person) => {
+      person.remove();
+    });
+  });
+};
