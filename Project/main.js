@@ -43,10 +43,7 @@ function limite(ingreso, tope0, tope1, tope2, tope3) {
   }
 }
 
-//limite(ingreso, tope0, tope1, tope2, tope3);
-
 //! Arrays
-//Desafio arrays
 class User {
   constructor(user) {
     this.name = user.name;
@@ -68,11 +65,6 @@ let users = [
     income: 26000,
   }),
   new User({
-    name: "Ricardo",
-    lastName: "Villaseñor Sanchez",
-    income: 11200,
-  }),
-  new User({
     name: "Ivette",
     lastName: "Cruz Contreras",
     income: 30000,
@@ -92,6 +84,9 @@ let users = [
 const myForm = document.forms["myForm"];
 myForm.onsubmit = function (e) {
   e.preventDefault();
+  //Botones
+  const resetButton = document.getElementById("resetButton");
+  const persons = document.querySelectorAll(".user");
   let nme = document.getElementById("nme").value;
   let lsNme = document.getElementById("lastName").value;
   let incm = document.getElementById("income").value;
@@ -105,15 +100,23 @@ myForm.onsubmit = function (e) {
 
   // Ordenar de mayor a menor ungreso
   let topIncome = users.sort((a, b) => b.income - a.income);
-
-  //Calcular los impuestos
-  let userTaxes = users.forEach((user) => {
-    limite(user.income, tope0, tope1, tope2, tope3);
-  });
+  for (const userSorted of topIncome) {
+    let temp = JSON.stringify(userSorted);
+    let tempName = JSON.stringify(userSorted.name);
+    localStorage.setItem(tempName, temp);
+  }
 
   let userList = document.getElementById("userList");
 
-  for (const usuario of topIncome) {
+  //!Obtener los elementos del local Storage
+  let localStorageLArray = [];
+  for (let index = 0; index < localStorage.length; index++) {
+    const localTemp = JSON.parse(localStorage.getItem(localStorage.key(index)));
+    localStorageLArray.push(localTemp);
+  }
+  console.log(localStorageLArray);
+
+  for (const usuario of localStorageLArray) {
     let userDiv = document.createElement("div");
     userDiv.className = "user";
     userDiv.innerHTML = `
@@ -123,15 +126,12 @@ myForm.onsubmit = function (e) {
   `;
     userList.append(userDiv);
   }
-  //Botones
-  const btn = document.getElementById("resetButton");
-  const persons = document.querySelectorAll(".user");
-  console.log(persons);
 
-  btn.addEventListener("click", () => {
+  resetButton.addEventListener("click", () => {
     console.log("hey");
     persons.forEach((person) => {
       person.remove();
+      localStorage.clear();
     });
   });
 };
