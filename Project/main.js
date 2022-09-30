@@ -38,7 +38,7 @@ function limite(ingreso, tope0, tope1, tope2, tope3) {
       break;
 
     default:
-      return "Ingresa una cantidad menor a 208,333 MNX, de lo contrario tu régimen es incorrecto o ingresaste un carácter que no es un número ";
+      return "Ingresa una cantidad mayor a 208,333 MNX, de lo contrario tu régimen es incorrecto o ingresaste un carácter que no es un número ";
       break;
   }
 }
@@ -77,14 +77,14 @@ let users = [
   new User({
     name: "María Juana",
     lastName: "Cruz Juan",
-    income: 55000,
+    income: 210000,
   }),
 ];
 //!Form
 const myForm = document.forms["myForm"];
 myForm.onsubmit = function (e) {
   e.preventDefault();
-  //Botones
+  //!Botones
   const resetButton = document.getElementById("resetButton");
   const persons = document.querySelectorAll(".user");
   let nme = document.getElementById("nme").value;
@@ -114,24 +114,32 @@ myForm.onsubmit = function (e) {
     const localTemp = JSON.parse(localStorage.getItem(localStorage.key(index)));
     localStorageLArray.push(localTemp);
   }
-  console.log(localStorageLArray);
 
   for (const usuario of localStorageLArray) {
+    persons.forEach((person) => {
+      person.remove();
+    });
     let userDiv = document.createElement("div");
     userDiv.className = "user";
     userDiv.innerHTML = `
   <H2> ${usuario.name} ${usuario.lastName} </H2>
-  <h3> Con un ingreso de  $${usuario.income}.00 MXN </h3>
+  <h3> Con un ingreso de  $${
+    parseInt(usuario.income) > 208333
+      ? usuario.income +
+        ".00 MXN" +
+        "  <b>Necesitas cambiar de régimen fiscal</b>"
+      : usuario.income + ".00 MXN"
+  }</h3>
   <p> ${limite(usuario.income, tope0, tope1, tope2, tope3)} </p>
   `;
     userList.append(userDiv);
   }
 
   resetButton.addEventListener("click", () => {
-    console.log("hey");
     persons.forEach((person) => {
-      person.remove();
       localStorage.clear();
+      console.log(person);
+      person.remove();
     });
   });
 };
