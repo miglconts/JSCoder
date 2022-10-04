@@ -127,14 +127,20 @@ myForm.onsubmit = function (e) {
     parseInt(usuario.income) > 208333
       ? usuario.income +
         ".00 MXN" +
-        "  <b>Necesitas cambiar de régimen fiscal</b>"
+        "  <b class = 'text-danger' s>Necesitas cambiar de régimen fiscal</b>"
       : usuario.income + ".00 MXN"
   }</h3>
   <p> ${limite(usuario.income, tope0, tope1, tope2, tope3)} </p>
   `;
     userList.append(userDiv);
   }
-
+  //!Librerias
+  Swal.fire({
+    title: "Éxito",
+    text: "Datos enviados con éxito",
+    icon: "success",
+    confirmButtonText: "Genial",
+  });
   resetButton.addEventListener("click", () => {
     persons.forEach((person) => {
       localStorage.clear();
